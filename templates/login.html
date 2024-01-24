@@ -1,0 +1,40 @@
+
+{% extends "header.html" %}
+{% block title%}
+Login / Sign up 
+{% endblock%}
+{% block content %}
+<div class="welcome">
+    <h1>Welcome to Healthy Urgent Care</h1>
+    <h4>Login if you have an account or Signup for new one</h4>
+</div>
+<div class="welcome-btn">
+    <input type="button" id="login-btn" class="btn btn-success" value="LOGIN" >
+    <input type="button" id="signup-btn" class="btn btn-info" value="SIGN UP"> 
+</div>
+<form action="/auth" method="get" class="login-form" id="login-form" style="display: none;" onsubmit="get_user()">
+    <div class="mb-3">
+        <label for="" class="form-label"> User name</label>
+        <input type="text" class="form-control" name="userName" placeholder="Enter your name" id="userName" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label"> Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+    </div>
+    <input type="submit" value="Login">
+</form>
+
+<form action="/signup" method="get" class="signup-form" id="signup-form" style="display: none;">
+    <div class="mb-3">
+        <label for="" class="form-label"> User name</label>
+        <input type="text" class="form-control" name="userName" placeholder="Enter your name" required>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label"> Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+    </div>
+    <input type="submit" value="Sign up">
+</form>
+<script src="{{ url_for('static', filename='js/login.js')}}"></script>
+{% endblock %}
+

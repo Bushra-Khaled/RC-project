@@ -1,0 +1,45 @@
+{% extends "header.html" %}
+{% block title%}
+    Update booking list
+{% endblock%}
+{% block content %}
+    <form action="/add" method="get" class="update-form">
+       <input type="hidden" name="id" value="{{data.id}}">
+        <div class="mb-3">
+            <label for="name" class="form-label"> Patient Name</label>
+            <input type="text" class="form-control" placeholder="Enter your name" name="name" value="{{data.name}}">
+        </div>
+        
+        <div class="mb-3">
+            <label for="" class="form-label">Email</label>
+            <input type="email"class="form-control" placeholder="Enter your email" name="email" value="{{data.email}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Phone Number</label>
+            <input type="number" class="form-control" placeholder="Enter your phone number" name="phone" value="{{data.phone}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Address</label>
+            <input type="text" class="form-control" placeholder="Enter your address" name="address" value="{{data.address}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label"> Age</label>
+            <input type="number" class="form-control" placeholder="Hwo old are you" name="age" value="{{data.age}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Appointment</label>
+            <input type="datetime-local" class="form-control" value="" name="appointment" value="{{data.appointment}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Additional Comment</label>
+            <input type="text" class="form-control" placeholder="Explain more..." name="additionalInfo" value="{{data.additionalInfo}}">
+        </div>
+
+        <input type="submit" class="btn btn-warning" value="UPDATE">
+    </form>
+{% endblock %}

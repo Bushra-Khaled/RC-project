@@ -1,0 +1,75 @@
+features neede: 
+link the front end pages ✅
+make it responsive
+add new booking in the show page.✅
+add search in the show page
+check for entry to not be empty "signup and login" 
+add required to inputs
+handel it with error message
+handel the navbar 
+add dropdown list for the doctors in the patient form 
+advanced feature to let each doctor able to see his booking patient only 
+
+
+
+front end 
+ 1. doctor login page
+ 2. booking form page
+ 2. 404 error page
+ 4. dashboard page
+  4.1. table to show all bookings
+  4.2. add action buttons (edit / delete / add)
+  4.3. simple edit page
+  4.4. 
+
+
+
+back end 
+ 1. login and auth function
+ 2. create new booking function
+ 3. show all booking function
+ 4. delete one booking function
+ 5. edit / update booking function
+
+
+Requirment check list: 
+ 01. ✅It is available on GitHub.
+ 02. ✅It uses the Flask web framework.
+ 03. ✅It uses at least one module from the Python Standard Library other than the random
+        module (for example, you could use the datetime module.)
+ 04. ✅It contains at least one class written by you that has both properties and methods.
+        It uses __init__() to let the class initialize the object's properties (note that __init__()
+        doesn't count as a method). This includes instantiating the class and using the methods in your app.
+        Methods that only print something in the terminal will not be considered.
+ 05. ✅It makes use of JavaScript in the front end and uses the localStorage of the web browser.
+ 06. ✅It uses modern JavaScript (for example, let and const rather than var).
+ 07. ✅It makes use of the writing to and reading from the same file feature.
+ 08. ✅It contains both conditional statements and loops.
+ 09. ✅It doesn't generate any error message even if the user enters a wrong input.
+ 10. ✅It lets the user enter a value in a text box at some point. This value should be received and processed
+        by your back end Python code.
+ 11. ✅It is styled using CSS.
+ 12. The code follows the code and style conventions we introduced in the course,
+      is fully documented using comments and doesn't contain unused or experimental code. 
+      In particular, the code should not use print() or console.log() for any information the app user should see. 
+      Instead, all user feedback needs to be visible in the browser.
+
+
+#patient form {
+    name / address / telephone number / email / 
+    age / gender / comment box / appointment date and time
+}
+
+#book class { 
+    properties: the form inputs (name , phone , email, ....)
+
+    objects: 
+
+    methods:
+     1. create new book 
+     2. edit an existing book
+     3. delete book
+     4. show
+
+
+}

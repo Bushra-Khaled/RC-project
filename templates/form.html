@@ -1,0 +1,48 @@
+{% extends "header.html" %}
+{% block title%}
+    Booking form
+{% endblock%}
+{% block content %}
+<div class="form">
+    <form action="/add" method="get" class="reg-form">
+        <div class="mb-3">
+            <label for="name" class="form-label"> Patient Name</label>
+            <input class="form-control" type="text" placeholder="Enter your name" name="name" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="" class="form-label">Email</label>
+            <input class="form-control" type="email" placeholder="Enter your email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Phone Number</label>
+            <input class="form-control" type="tel" placeholder="Enter your phone number" name="phone" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Address</label>
+            <input class="form-control" type="text" placeholder="Enter your address" name="address" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label"> Age</label>
+            <input class="form-control" type="number" placeholder="Hwo old are you" name="age" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Appointment</label>
+            <input class="form-control" type="datetime-local" value="" name="appointment" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Additional Comment</label>
+            <input class="form-control" type="text" placeholder="Explain more..." name="additionalInfo">
+        </div>
+
+        <input type="submit" class="btn btn-outline-primary" value="BOOK">
+    </form>
+</div>
+{% endblock %}
+
+    
