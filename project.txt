@@ -1,11 +1,11 @@
 features neede: 
 link the front end pages ✅
-make it responsive
+make it responsive ✅
 add new booking in the show page.✅
+check for entry to not be empty "signup and login" ✅
+add required to inputs✅
 add search in the show page
-check for entry to not be empty "signup and login" 
-add required to inputs
-handel it with error message
+handel it with error message✅
 handel the navbar 
 add dropdown list for the doctors in the patient form 
 advanced feature to let each doctor able to see his booking patient only 
@@ -63,13 +63,10 @@ Requirment check list:
 #book class { 
     properties: the form inputs (name , phone , email, ....)
 
-    objects: 
-
     methods:
      1. create new book 
      2. edit an existing book
      3. delete book
      4. show
-
 
 }

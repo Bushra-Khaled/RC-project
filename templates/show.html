@@ -9,22 +9,24 @@ Booking list
             <table class="table table-striped table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th scope="col">Patient ID</th>
-                    <th scope="col">Entry Date</th>
-                    <th scope="col">Patient Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Appointment</th>
-                    <th scope="col">Additional information</th>
-                    <th scope="col">Action</th>
+                    <th >#</th>
+                    <th >Entry ID</th>
+                    <th >Entry Date</th>
+                    <th >Patient Name</th>
+                    <th >Email</th>
+                    <th >Phone</th>
+                    <th >Address</th>
+                    <th >Age</th>
+                    <th >Appointment</th>
+                    <th >Additional Information</th>
+                    <th >Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for entry in data %}
                 <tr>
-                    <th scope="row">{{entry.id}}</th>
+                    <td>{{loop.index}}</td>
+                    <td id="entryID">{{entry.id}}</td>
                     <td>{{entry.entryDate}}</td>
                     <td>{{entry.name}}</td>
                     <td>{{entry.email}}</td>

@@ -5,7 +5,7 @@ import uuid
 from datetime import datetime
 app =flask.Flask("form")
 
-class book:
+class book():
     def __init__(self, name, phone, email, age, address, appointment, additionalInfo):
         self.name = name
         self.phone = phone
@@ -16,12 +16,14 @@ class book:
         self.additionalInfo =additionalInfo
 
     @app.route("/add")       
-    def create():
+    def create():  #create / update booking function
+        #check if the booking data has ID or not.
         get_id = request.args.get("id")
         if get_id == None:
             id =  "HUC-"+str(uuid.uuid1().time_low)
         else: 
             id = get_id
+        #save the data in an array
         newData = {
             'id' : id ,
             'name' : request.args.get('name'),
@@ -32,7 +34,8 @@ class book:
             'appointment' :request.args.get('appointment'),
             'additionalInfo' :request.args.get('additionalInfo'),
             'entryDate': str(datetime.now().strftime("%d/%m/%Y, at %H:%M"))
-        }     
+        }    
+        # update existing booking details 
         with open("booking.json", "r") as file:
             data = json.load(file)
             for i in data:
@@ -42,6 +45,7 @@ class book:
                         json.dump(data, file, indent=4 )
                         msg = i["name"] + "'s booking details had been updated."
                         return render_template("show.html", msg = msg, data = data)
+            # create new booking
             else:
                 with open("booking.json", "w") as file:
                     data.append(newData)
@@ -49,18 +53,18 @@ class book:
                     msg = "Dear "+ newData["name"] + ", Your booking had been scheduled on " + newData["appointment"] + "."
                     return render_template("form.html", msg= msg)  
 
-    @app.route("/show")
-    def show():
+    @app.route("/dashboard")
+    def show(): # fetch the booking file and send the data to the show page
         try:
             with open("booking.json", "r") as file:
                 data = json.load(file)
                 return render_template("show.html", data = data) 
         except:  
-            msg ="no data found"
+            msg ="NO DATA FOUND"
             return render_template("show.html", msg= msg)  
    
     @app.route("/edit")
-    def edit():
+    def edit(): # fetch the booking file by id and send its data to the update form 
         with open("booking.json", "r") as file:
             data = json.load(file)
             id = str(request.args.get("id"))
@@ -70,7 +74,7 @@ class book:
                     return render_template("edit.html", data = patientData, id = id)  
 
     @app.route("/delete")
-    def delete():
+    def delete(): # fetch the booking file by id and delete its related booking data
         with open("booking.json", "r") as file:
             data = json.load(file)
             id = request.args.get("id")
@@ -83,7 +87,7 @@ class book:
                 return render_template("show.html", data = data, msg = msg)  
 
 @app.route("/auth")
-def authUser():
+def authUser(): # check if the user is exist in the database
     userName =  request.args.get("userName")
     password = request.args.get("password")
     with open("users.json", "r") as file:
@@ -97,7 +101,7 @@ def authUser():
             return render_template("login.html", msg =msg)
 
 @app.route("/signup")
-def newUser():
+def newUser(): # check if it's existing before, and if not, will add new user to the database.
     userName =  request.args.get("userName")
     password = request.args.get("password")
     newUser = { 
@@ -115,8 +119,8 @@ def newUser():
             users.append(newUser)
             with open("users.json", "w") as file:
                 json.dump(users, file, indent=4 )
-                msg = "User added successfuly"
-            return render_template("show.html", msg =msg) 
+                msg = "User added successfuly, login and explore more!!"
+            return render_template("login.html", msg =msg) 
 
 @app.route("/booking")
 def bookingPage():
