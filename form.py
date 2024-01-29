@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 app =flask.Flask("form")
 
+
 class book():
     def __init__(self, name, phone, email, age, address, appointment, additionalInfo):
         self.name = name
@@ -18,8 +19,9 @@ class book():
     @app.route("/add")       
     def create():  #create / update booking function
         #check if the booking data has ID or not.
-        get_id = request.args.get("id")
-        if get_id == None:
+        get_id = str(request.args.get("id"))
+        print(get_id)
+        if get_id == '':
             id =  "HUC-"+str(uuid.uuid1().time_low)
         else: 
             id = get_id
@@ -51,7 +53,7 @@ class book():
                     data.append(newData)
                     json.dump(data, file, indent=4 )
                     msg = "Dear "+ newData["name"] + ", Your booking had been scheduled on " + newData["appointment"] + "."
-                    return render_template("form.html", msg= msg)  
+                    return render_template("form.html", msg= msg, data=data)  
 
     @app.route("/dashboard")
     def show(): # fetch the booking file and send the data to the show page
@@ -67,11 +69,14 @@ class book():
     def edit(): # fetch the booking file by id and send its data to the update form 
         with open("booking.json", "r") as file:
             data = json.load(file)
-            id = str(request.args.get("id"))
-            for i in data:
-                if i["id"] == id :
-                    patientData = i
-                    return render_template("edit.html", data = patientData, id = id)  
+            id = str(request.args.get("id"))            
+            if id == '':
+                return render_template("form.html", data= [])
+            else: 
+                for i in data:
+                    if i["id"] == id :
+                        patientData = i
+                        return render_template("form.html", data = patientData, id = id) 
 
     @app.route("/delete")
     def delete(): # fetch the booking file by id and delete its related booking data
@@ -85,6 +90,7 @@ class book():
             with open("booking.json", "w") as file:
                 json.dump(data, file, indent=4 )
                 return render_template("show.html", data = data, msg = msg)  
+
 
 @app.route("/auth")
 def authUser(): # check if the user is exist in the database

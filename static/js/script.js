@@ -30,3 +30,20 @@ if (msg.textContent !== "" ) {
 else {
     msg.style.display ="none";
 }
+
+// confirmation before delete
+const deleteBtns =document.getElementsByClassName("deleteBtn");
+const entryIDs = document.getElementsByClassName("entryID");
+for (let i = 0; i < deleteBtns.length; i++) {
+    const x = entryIDs[i].textContent;
+    deleteBtns[i].addEventListener("click", function() {
+        confirmDelete(x);
+    });
+}
+function confirmDelete(x){
+    if (confirm ("Are you sure you want to delete this appointment")) {
+       window.location.href =`/delete?id=${x}`;
+    }
+    else { 
+    }
+}
