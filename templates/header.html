@@ -14,11 +14,12 @@
                 <p class="nav-link active" aria-current="page" href="#" id="welcomeUser"></p>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('loginPage')}}" id="logout" onclick="remove_user()">Log out</a>
+                <a class="nav-link" href="{{ url_for('loginPage')}}" id="logout" style="display: none;">Log out</a>
             </li>
         </ul>
     </div>
     <h4 id="msg" style="display: none;">{{msg}}</h4>
+    <p id="UserNameHeader" name="UserNameHeader" hidden ></p>
     {% block content %}
     {% endblock %}
     

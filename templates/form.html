@@ -6,6 +6,7 @@
 <h1>Book An Appointment</h1>
 <div class="form">
     <form action="/add" method="get" class="reg-form">
+        <input type="hidden" name="userName" id="userName"  value="{{userName}}" >
         <input type="hidden" name="id"  id="entryId" value="{{data.id}}">
         <div class="mb-3">
             <label for="name" class="form-label"> Patient Name</label>
@@ -42,7 +43,7 @@
             <textarea name="additionalInfo" class="form-control" placeholder="Explain more..." rows="3">{{data.additionalInfo}}</textarea>
         </div>
         <div class="mb-3" id="updateSec" style="display: none;">
-            <a href="{{ url_for('show') }}" class="btn btn-danger cancelBtn">Cancel</a>
+            <a href="{{ url_for('authUser', userName = UserName) }}" class="btn btn-danger cancelBtn">Cancel</a>
             <input type="submit" class="btn btn-warning updateBtn" value="Update">
         </div>
 

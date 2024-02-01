@@ -1,12 +1,12 @@
 //shoe / hide update and book button
-const x = document.getElementById("entryId");
-const y = document.getElementById("updateSec");
-const z = document.getElementById("bookSec");
-if (x.value.length > 0 ){
-    y.style.display="inline-flex";
+const entryID = document.getElementById("entryId");
+const updateSec = document.getElementById("updateSec");
+const bookSec = document.getElementById("bookSec");
+if (entryID.value.length > 0 ){
+    updateSec.style.display="inline-flex";
 }
 else {
-    z.style.display="block";
+    bookSec.style.display="block";
 }
 
 // set the appointment calendar to start available book from now

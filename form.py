@@ -20,7 +20,6 @@ class book():
     def create():  #create / update booking function
         #check if the booking data has ID or not.
         get_id = str(request.args.get("id"))
-        print(get_id)
         if get_id == '':
             id =  "HUC-"+str(uuid.uuid1().time_low)
         else: 
@@ -37,6 +36,7 @@ class book():
             'additionalInfo' :request.args.get('additionalInfo'),
             'entryDate': str(datetime.now().strftime("%d/%m/%Y, at %H:%M"))
         }    
+        userName = request.args.get("userName")
         # update existing booking details 
         with open("booking.json", "r") as file:
             data = json.load(file)
@@ -46,25 +46,15 @@ class book():
                         i.update(newData)
                         json.dump(data, file, indent=4 )
                         msg = i["name"] + "'s booking details had been updated."
-                        return render_template("show.html", msg = msg, data = data)
+                        return render_template("show.html", msg = msg, data = data, userName= userName)
             # create new booking
             else:
                 with open("booking.json", "w") as file:
                     data.append(newData)
                     json.dump(data, file, indent=4 )
                     msg = "Dear "+ newData["name"] + ", Your booking had been scheduled on " + newData["appointment"] + "."
-                    return render_template("form.html", msg= msg, data=data)  
+                    return render_template("form.html", msg= msg, data=data, userName = userName)  
 
-    @app.route("/dashboard")
-    def show(): # fetch the booking file and send the data to the show page
-        try:
-            with open("booking.json", "r") as file:
-                data = json.load(file)
-                return render_template("show.html", data = data) 
-        except:  
-            msg ="NO DATA FOUND"
-            return render_template("show.html", msg= msg)  
-   
     @app.route("/edit")
     def edit(): # fetch the booking file by id and send its data to the update form 
         with open("booking.json", "r") as file:
@@ -76,35 +66,40 @@ class book():
                 for i in data:
                     if i["id"] == id :
                         patientData = i
-                        return render_template("form.html", data = patientData, id = id) 
+                        userName = request.args.get("userName")
+                        return render_template("form.html", data = patientData, id = id, userName = userName) 
 
     @app.route("/delete")
     def delete(): # fetch the booking file by id and delete its related booking data
         with open("booking.json", "r") as file:
             data = json.load(file)
             id = request.args.get("id")
+            userName = request.args.get("userName")
             for i in data:
                 if id == i["id"]:
                     msg = i["name"] + "'s appointment on " + i["appointment"] + " had been cancelled "
                     data.remove(i)               
             with open("booking.json", "w") as file:
                 json.dump(data, file, indent=4 )
-                return render_template("show.html", data = data, msg = msg)  
+                return render_template("show.html", data = data, msg = msg, userName = userName)  
 
 
-@app.route("/auth")
+@app.route("/dashboard")
 def authUser(): # check if the user is exist in the database
     userName =  request.args.get("userName")
     password = request.args.get("password")
-    with open("users.json", "r") as file:
-        users = json.load(file)
-        for i in users:
-            if userName == i["userName"]: 
-                if password == i["password"]:
-                    return redirect(url_for("show"))
-        else:
-            msg = "User name or password is not correct! Please try again!"
-            return render_template("login.html", msg =msg)
+    with open ("booking.json", "r") as bookingFile:
+        data = json.load(bookingFile)
+        with open("users.json", "r") as file:
+            users = json.load(file)
+            for i in users:
+                if userName == i["userName"]: 
+                    if password == i["password"]:
+                        print(data)
+                        return render_template("show.html", userName = userName, data = data)
+            else:
+                msg = "User name or password is not correct! Please try again!"
+                return render_template("login.html", msg =msg)
 
 @app.route("/signup")
 def newUser(): # check if it's existing before, and if not, will add new user to the database.

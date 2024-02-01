@@ -3,9 +3,10 @@
 Booking list
 {% endblock%}
 {% block content %}
+<p name="userNameShow" id="userNameShow" hidden> {{userName}}</p>
 <div>
     <h1>Booking Details</h1>
-    <a href="{{ url_for('edit', id= '') }}" class="btn btn-info" id="addNewBtn"> ADD NEW</a>
+    <a href="{{ url_for('edit', id= '', userName = userName) }}" class="btn btn-info" id="addNewBtn"> ADD NEW</a>
     <table class="table table-striped table-hover table-bordered">
         <thead class="table-light">
             <tr>
@@ -36,7 +37,7 @@ Booking list
                     <td>{{entry.appointment}}</td>
                     <td>{{entry.additionalInfo}}</td>
                     <td>
-                        <a href="{{ url_for('edit',id = entry.id) }}" class="btn btn-warning"> Update</a>
+                        <a href="{{ url_for('edit',id = entry.id, userName =userName) }}" class="btn btn-warning"> Update</a>
                         <a  class="btn btn-danger deleteBtn">Delete</a>
                     </td>
                 </tr>
@@ -44,4 +45,6 @@ Booking list
                 </tbody>
             </table>
 </div>
+<script src="{{ url_for('static', filename='js/show.js')}}"></script>
+
 {% endblock %}
